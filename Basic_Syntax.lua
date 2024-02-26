@@ -5,8 +5,10 @@
 print("the player can see this message")
 
 -- you can create a variable like this
-number = 1
-
+--local variable (only 1 script can read it)
+local number = 1
+--global variable (all scripts can read it)
+_G.number = 2
 --then you can check the value of a variable by using double equals signs
 if number == 1 then
   print("yep, thats a one)
