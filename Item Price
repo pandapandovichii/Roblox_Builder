@@ -1,0 +1,8 @@
+-- This goes into Replicated Storage
+local ItemPrice = {
+	["LaserGun"] = 50;
+	["SubspaceGun"] = 200;
+	["MachineGun"] = 600;
+}
+
+return ItemPrice
