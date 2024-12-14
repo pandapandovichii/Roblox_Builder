@@ -1,0 +1,16 @@
+local ReplicatedStorage = game:GetService('ReplicatedStorage')
+local buyRe = ReplicatedStorage:FindFirstChild("BuyItem")
+local ItemsFolder = ReplicatedStorage:FindFirstChild("Items")
+
+local function onBuyItem(player, itemName, price)
+	local item = ItemsFolder:FindFirstChild(itemName)
+	if item and item:IsA("Tool") and player.leaderstats.Score.Value>= price then
+		player.leaderstats.Score.Value = player.leaderstats.Score.Value - price
+		item:Clone().Parent = player.Backpack
+		print(player.Name .. " Bought " .. itemName)
+	end
+end
+
+buyRe.OnServerEvent:Connect(function(player,itemName,price)
+	onBuyItem(player,itemName,price)
+end)
