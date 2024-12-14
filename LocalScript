@@ -1,0 +1,27 @@
+-- Put This Inside ShopGUI
+local ItemPrice = require(game.ReplicatedStorage.ItemPrice)
+
+--Buy Button--
+local BuyItemRE = game.ReplicatedStorage:WaitForChild("BuyItem")
+
+local function onBuyButtonClick(itemName)
+	local price = ItemPrice[itemName]
+	if price then
+		BuyItemRE:FireServer(itemName, price)
+		print("player bought the item")
+	else
+		warn("Item does not exist in the price list")
+	end
+
+end
+
+for _,itemFrame in pairs(script.Parent.ShopFrame:GetChildren()) do
+	if itemFrame:IsA("Frame") then
+		local buyButton = itemFrame:FindFirstChild("Buy")
+		if buyButton and buyButton:IsA("TextButton") then
+			buyButton.MouseButton1Click:Connect(function()
+				onBuyButtonClick(itemFrame.Name)
+			end)
+		end
+	end
+end
